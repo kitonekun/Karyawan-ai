@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kantor Karyawan AI — Sewa Karyawan AI untuk Bisnis Anda</title>
+  <meta name="description" content="Sewa karyawan AI yang mengurus stok gudang, laporan keuangan, peringatan stok menipis, penjualan, dan lainnya. Siap kerja dalam 5 menit." />
+  <style>
+    :root { --primary: #3557e6; --primary-dark: #2440b8; --ink: #121a33; --text: #2a3248; --muted: #667089; --bg: #f6f8fd; --line: #e3e7ef; --warn: #d9480f; --ok: #2b8a3e; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--text); background: #fff; line-height: 1.6; }
+    a { color: inherit; }
+    .wrap { width: min(1120px, 100% - 40px); margin: 0 auto; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 10px; font-weight: 600; text-decoration: none; border: 2px solid transparent; font-size: 15px; transition: transform .15s, background .15s; }
+    .btn:hover { transform: translateY(-1px); }
+    .btn.primary { background: var(--primary); color: #fff; }
+    .btn.primary:hover { background: var(--primary-dark); }
+    .btn.outline { border-color: var(--line); background: #fff; color: var(--ink); }
+    .btn.light { background: #fff; color: var(--primary); }
+    .btn.ghost-light { border-color: rgba(255,255,255,.5); color: #fff; }
+
+    /* Navbar */
+    .nav { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 66px; gap: 16px; }
+    .logo { font-weight: 800; color: var(--ink); text-decoration: none; font-size: 18px; }
+    .nav-links { display: flex; gap: 24px; font-size: 15px; }
+    .nav-links a { text-decoration: none; color: var(--muted); }
+    .nav-links a:hover { color: var(--ink); }
+    .nav .btn { padding: 9px 16px; }
+
+    /* Hero */
+    .hero { background: radial-gradient(1000px 500px at 85% -10%, #dfe6ff 0, transparent 60%), var(--bg); padding: 72px 0 88px; }
+    .hero .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+    .tag { display: inline-block; background: #e8edff; color: var(--primary); font-weight: 600; font-size: 13px; padding: 5px 12px; border-radius: 20px; }
+    h1 { font-size: clamp(34px, 5vw, 52px); line-height: 1.12; color: var(--ink); margin: 16px 0; letter-spacing: -.02em; }
+    h1 span { color: var(--primary); }
+    .lead { font-size: 18px; color: var(--muted); margin: 0 0 28px; max-width: 540px; }
+    .cta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .trust { margin-top: 28px; display: flex; gap: 22px; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
+
+    .mock { background: #fff; border-radius: 18px; box-shadow: 0 30px 70px -20px rgba(18, 26, 51, .28); border: 1px solid var(--line); overflow: hidden; }
+    .mock-bar { display: flex; gap: 6px; padding: 12px 14px; border-bottom: 1px solid var(--line); background: #fafbff; align-items: center; font-size: 13px; color: var(--muted); }
+    .mock-bar i { width: 10px; height: 10px; border-radius: 50%; background: #e3e7ef; display: inline-block; }
+    .mock-bar b { margin-left: 8px; font-weight: 600; }
+    .mock-body { padding: 18px; display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
+    .bubble { max-width: 88%; padding: 10px 14px; border-radius: 14px; opacity: 0; animation: pop .45s forwards; }
+    .bubble.bot { background: #f0f2f8; border-bottom-left-radius: 4px; }
+    .bubble.user { align-self: flex-end; background: var(--primary); color: #fff; border-bottom-right-radius: 4px; }
+    .bubble .who { display: block; font-size: 12px; font-weight: 700; color: var(--muted); }
+    .team { display: grid; gap: 6px; margin-top: 8px; }
+    .team div { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 7px 10px; font-size: 13px; }
+    .alert-mini { background: #fff2e8; border: 1px solid #ffd8bf; color: var(--warn); border-radius: 10px; padding: 9px 12px; font-size: 13px; }
+    .bubble:nth-child(2) { animation-delay: .6s; } .bubble:nth-child(3) { animation-delay: 1.2s; }
+    .bubble:nth-child(4) { animation-delay: 1.8s; } .bubble:nth-child(5) { animation-delay: 2.4s; }
+    @keyframes pop { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .bubble { animation: none; opacity: 1; } .btn:hover { transform: none; } }
+
+    /* Sections */
+    section { padding: 88px 0; }
+    .head { text-align: center; max-width: 680px; margin: 0 auto 48px; }
+    .head h2 { font-size: clamp(28px, 3.5vw, 38px); color: var(--ink); margin: 10px 0; line-height: 1.2; letter-spacing: -.01em; }
+    .head p { color: var(--muted); margin: 0; font-size: 17px; }
+    .alt { background: var(--bg); }
+
+    .pain { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .pain div { padding: 24px; border-radius: 14px; border: 1px solid var(--line); }
+    .pain b { display: block; color: var(--ink); font-size: 17px; margin: 8px 0 4px; }
+    .pain p { margin: 0; color: var(--muted); font-size: 15px; }
+    .emoji { font-size: 28px; }
+
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; counter-reset: s; }
+    .step { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 24px; position: relative; }
+    .step::before { counter-increment: s; content: counter(s); width: 36px; height: 36px; border-radius: 50%; background: var(--primary); color: #fff; font-weight: 700; display: grid; place-items: center; margin-bottom: 14px; }
+    .step b { display: block; color: var(--ink); font-size: 17px; margin-bottom: 6px; }
+    .step p { margin: 0; color: var(--muted); font-size: 15px; }
+    .step em { display: block; margin-top: 10px; font-style: normal; font-size: 13px; background: var(--bg); border-radius: 8px; padding: 8px 10px; color: var(--text); }
+
+    .roles { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
+    .role { border: 1px solid var(--line); border-radius: 14px; padding: 22px; background: #fff; transition: box-shadow .2s, border-color .2s; }
+    .role:hover { border-color: #c9d4ff; box-shadow: 0 12px 30px -16px rgba(53, 87, 230, .35); }
+    .role b { display: block; color: var(--ink); margin: 8px 0 6px; font-size: 17px; }
+    .role ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
+
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .features div b { display: block; color: var(--ink); margin: 6px 0 4px; font-size: 17px; }
+    .features div p { margin: 0; color: var(--muted); font-size: 15px; }
+
+    .pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
+    .plan { border: 1px solid var(--line); border-radius: 18px; padding: 30px; display: flex; flex-direction: column; background: #fff; }
+    .plan.best { border: 2px solid var(--primary); box-shadow: 0 24px 50px -24px rgba(53, 87, 230, .45); position: relative; }
+    .plan.best::before { content: "Paling populer"; position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--primary); color: #fff; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
+    .plan h3 { margin: 0; color: var(--ink); font-size: 20px; }
+    .plan .for { color: var(--muted); font-size: 14px; margin: 4px 0 18px; }
+    .price { font-size: 34px; font-weight: 800; color: var(--ink); }
+    .price small { font-size: 15px; font-weight: 500; color: var(--muted); }
+    .plan ul { list-style: none; padding: 0; margin: 20px 0 26px; display: grid; gap: 10px; font-size: 15px; }
+    .plan li::before { content: "✓"; color: var(--ok); font-weight: 700; margin-right: 8px; }
+    .plan .btn { margin-top: auto; justify-content: center; }
+    .note { text-align: center; color: var(--muted); font-size: 14px; margin-top: 22px; }
+
+    .faq { max-width: 760px; margin: 0 auto; display: grid; gap: 12px; }
+    details { border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; background: #fff; }
+    summary { cursor: pointer; font-weight: 600; color: var(--ink); list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::after { content: "+"; color: var(--primary); font-size: 20px; line-height: 1; }
+    details[open] summary::after { content: "−"; }
+    details p { margin: 10px 0 0; color: var(--muted); }
+
+    .final { background: linear-gradient(135deg, #2440b8, #3557e6 60%, #5a74f0); color: #fff; text-align: center; border-radius: 24px; padding: 64px 24px; }
+    .final h2 { font-size: clamp(28px, 3.5vw, 38px); margin: 0 0 12px; line-height: 1.2; }
+    .final p { margin: 0 auto 28px; opacity: .9; max-width: 560px; font-size: 17px; }
+    .final .cta { justify-content: center; }
+
+    footer { border-top: 1px solid var(--line); padding: 28px 0; font-size: 14px; color: var(--muted); }
+    footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    footer a { text-decoration: none; margin-left: 18px; }
+
+    @media (max-width: 900px) {
+      .hero .wrap { grid-template-columns: 1fr; gap: 40px; }
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .pain, .features, .pricing { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      section { padding: 64px 0; }
+    }
+    @media (max-width: 540px) { .steps { grid-template-columns: 1fr; } .hero { padding: 48px 0 64px; } }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap">
+      <a class="logo" href="/">🏢 Kantor Karyawan AI</a>
+      <div class="nav-links">
+        <a href="#cara-kerja">Cara Kerja</a>
+        <a href="#karyawan">Karyawan</a>
+        <a href="#harga">Harga</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <a class="btn outline" href="/kantor">Masuk</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <div>
+        <span class="tag">🤖 Karyawan AI untuk UMKM & perusahaan</span>
+        <h1>Sewa karyawan AI yang <span>siap kerja</span> dalam 5 menit</h1>
+        <p class="lead">Cukup katakan butuh berapa karyawan. Kepala Pengelola kami menyiapkan tim lengkap dengan tugasnya: mengurus stok gudang, menyusun laporan keuangan, sampai memperingatkan stok yang menipis.</p>
+        <div class="cta">
+          <a class="btn primary" href="/kantor?kode=DEMO123">Coba Demo Gratis →</a>
+          <a class="btn outline" href="#harga">Lihat Paket</a>
+        </div>
+        <div class="trust">
+          <span>✅ Tanpa instalasi</span><span>✅ Siap dipakai kapan saja</span><span>✅ Data tiap perusahaan terpisah</span>
+        </div>
+      </div>
+
+      <div class="mock" aria-hidden="true">
+        <div class="mock-bar"><i></i><i></i><i></i><b>Kepala Pengelola — Pak Bima</b></div>
+        <div class="mock-body">
+          <div class="bubble bot"><span class="who">Pak Bima</span>Halo! Anda butuh berapa karyawan?</div>
+          <div class="bubble user">3 orang</div>
+          <div class="bubble bot"><span class="who">Pak Bima</span>Saya sudah siapkan 3 karyawan untuk Anda:
+            <div class="team">
+              <div>📦 <b>A. Andi</b> — Stok gudang</div>
+              <div>💰 <b>B. Bunga</b> — Laporan keuangan</div>
+              <div>🚨 <b>C. Citra</b> — Lapor stok menipis</div>
+            </div>
+          </div>
+          <div class="bubble user">Setuju</div>
+          <div class="bubble alert-mini">🚨 <b>Citra:</b> Minyak Goreng tinggal 6 botol (min 12). Saran pesan ulang 18 botol.</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap">
+      <div class="head">
+        <span class="tag">Masalah yang sering terjadi</span>
+        <h2>Bisnis tumbuh, pekerjaan administrasi ikut menumpuk</h2>
+      </div>
+      <div class="pain">
+        <div><span class="emoji">📉</span><b>Stok tiba-tiba habis</b><p>Barang laris kosong karena tidak ada yang memantau, pelanggan pun pindah ke toko lain.</p></div>
+        <div><span class="emoji">🧾</span><b>Laporan keuangan telat</b><p>Untung atau rugi baru ketahuan di akhir bulan, itu pun kalau sempat direkap.</p></div>
+        <div><span class="emoji">💸</span><b>Biaya staf mahal</b><p>Merekrut staf admin baru butuh gaji, pelatihan, dan waktu yang tidak sedikit.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="cara-kerja">
+    <div class="wrap">
+      <div class="head">
+        <span class="tag">Cara kerja</span>
+        <h2>Dari chat singkat menjadi tim yang langsung bekerja</h2>
+        <p>Tidak perlu keahlian teknis. Semua lewat percakapan.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><b>Sebutkan kebutuhan</b><p>Kepala Pengelola menanyakan butuh berapa karyawan dan untuk apa.</p><em>"3 karyawan untuk gudang dan keuangan"</em></div>
+        <div class="step"><b>Terima usulan tim</b><p>Anda mendapat nama karyawan beserta pembagian tugasnya. Ubah sesuka Anda.</p><em>A. gudang · B. keuangan · C. stok menipis</em></div>
+        <div class="step"><b>Setujui & rekrut</b><p>Satu klik, karyawan AI aktif dan langsung bekerja dengan data bisnis Anda.</p><em>"Setuju" → tim aktif</em></div>
+        <div class="step"><b>Terima laporan</b><p>Laporan stok, keuangan, dan penjualan siap kapan pun dibutuhkan, peringatan stok masuk otomatis.</p><em>🚨 Stok menipis dilaporkan otomatis</em></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="karyawan">
+    <div class="wrap">
+      <div class="head">
+        <span class="tag">Pilihan karyawan</span>
+        <h2>7 jabatan siap pakai, bisa dikombinasikan</h2>
+        <p>Rekrut hanya yang Anda butuhkan. Tugas setiap karyawan juga bisa diubah.</p>
+      </div>
+      <div class="roles">
+        <div class="role"><span class="emoji">📦</span><b>Staf Stok Gudang</b><ul><li>Catat barang masuk & keluar</li><li>Ringkasan posisi stok harian</li><li>Hitung nilai persediaan</li></ul></div>
+        <div class="role"><span class="emoji">💰</span><b>Staf Laporan Keuangan</b><ul><li>Catat pemasukan & pengeluaran</li><li>Laporan laba/rugi bulanan</li><li>Rekap per kategori</li></ul></div>
+        <div class="role"><span class="emoji">🚨</span><b>Pengawas Stok Menipis</b><ul><li>Pantau stok di bawah minimum</li><li>Peringatan otomatis seketika</li><li>Saran jumlah pesan ulang</li></ul></div>
+        <div class="role"><span class="emoji">🛒</span><b>Staf Penjualan</b><ul><li>Catat penjualan & potong stok</li><li>Hitung omzet harian</li><li>Laporan produk terlaris</li></ul></div>
+        <div class="role"><span class="emoji">💬</span><b>Customer Service</b><ul><li>Template balasan pelanggan</li><li>Info ketersediaan produk</li><li>Rangkum pertanyaan pelanggan</li></ul></div>
+        <div class="role"><span class="emoji">📣</span><b>Staf Pemasaran</b><ul><li>Ide promosi dari stok berlebih</li><li>Caption media sosial</li><li>Rencana kampanye mingguan</li></ul></div>
+        <div class="role"><span class="emoji">🗂️</span><b>Admin & Penjadwalan</b><ul><li>Rekap aktivitas tim</li><li>Agenda kerja harian</li><li>Pengingat tindak lanjut</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="head">
+        <span class="tag">Keunggulan</span>
+        <h2>Lebih dari sekadar chatbot</h2>
+      </div>
+      <div class="features">
+        <div><span class="emoji">📊</span><b>Bekerja dengan data asli</b><p>Laporan dihitung dari stok dan transaksi bisnis Anda, bukan jawaban karangan.</p></div>
+        <div><span class="emoji">🔗</span><b>Saling terhubung</b><p>Penjualan otomatis memotong stok dan tercatat sebagai pemasukan di keuangan.</p></div>
+        <div><span class="emoji">⚡</span><b>Peringatan seketika</b><p>Begitu stok menyentuh batas minimum, pengawas langsung melapor.</p></div>
+        <div><span class="emoji">💬</span><b>Bisa diajak ngobrol</b><p>Tanya "stok apa yang menipis?" atau "berapa laba bulan ini?" langsung ke karyawan.</p></div>
+        <div><span class="emoji">🔒</span><b>Data aman & terpisah</b><p>Setiap perusahaan punya kantor sendiri dengan kode akses khusus.</p></div>
+        <div><span class="emoji">📈</span><b>Mudah ditambah</b><p>Bisnis berkembang? Tambah karyawan kapan saja sesuai paket.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="harga">
+    <div class="wrap">
+      <div class="head">
+        <span class="tag">Harga</span>
+        <h2>Lebih hemat dari gaji satu staf admin</h2>
+        <p>Pilih paket sesuai jumlah karyawan AI yang Anda butuhkan.</p>
+      </div>
+      <div class="pricing">
+        <div class="plan">
+          <h3>Starter</h3><div class="for">Untuk toko & UMKM</div>
+          <div class="price">Rp 149rb<small>/bulan</small></div>
+          <ul><li>3 karyawan AI</li><li>Gudang, keuangan, stok menipis</li><li>Laporan harian</li><li>Dukungan via WhatsApp</li></ul>
+          <a class="btn outline js-contact" data-plan="Starter" href="/kantor?kode=DEMO123">Pilih Starter</a>
+        </div>
+        <div class="plan best">
+          <h3>Bisnis</h3><div class="for">Untuk usaha yang sedang tumbuh</div>
+          <div class="price">Rp 299rb<small>/bulan</small></div>
+          <ul><li>5 karyawan AI</li><li>Semua jabatan tersedia</li><li>Chat dengan karyawan AI</li><li>Laporan penjualan & promosi</li></ul>
+          <a class="btn primary js-contact" data-plan="Bisnis" href="/kantor?kode=DEMO123">Pilih Bisnis</a>
+        </div>
+        <div class="plan">
+          <h3>Perusahaan</h3><div class="for">Untuk tim & cabang lebih besar</div>
+          <div class="price">Rp 599rb<small>/bulan</small></div>
+          <ul><li>Hingga 10 karyawan AI</li><li>Semua fitur paket Bisnis</li><li>Prioritas dukungan</li><li>Bantuan migrasi data</li></ul>
+          <a class="btn outline js-contact" data-plan="Perusahaan" href="/kantor?kode=DEMO123">Hubungi Kami</a>
+        </div>
+      </div>
+      <p class="note">Butuh lebih dari 10 karyawan? Hubungi kami untuk penawaran khusus.</p>
+    </div>
+  </section>
+
+  <section class="alt" id="faq">
+    <div class="wrap">
+      <div class="head"><span class="tag">FAQ</span><h2>Pertanyaan yang sering diajukan</h2></div>
+      <div class="faq">
+        <details><summary>Apa itu karyawan AI?</summary><p>Asisten digital dengan jabatan dan tugas tertentu, misalnya staf gudang atau staf keuangan, yang mengolah data bisnis Anda menjadi catatan, laporan, dan peringatan.</p></details>
+        <details><summary>Apakah perlu memasang aplikasi?</summary><p>Tidak. Cukup buka lewat browser di komputer atau HP, lalu masuk dengan kode akses perusahaan Anda.</p></details>
+        <details><summary>Bagaimana cara karyawan AI mendapatkan data?</summary><p>Anda atau staf Anda mencatat barang dan transaksi di menu Gudang dan Keuangan. Karyawan AI mengolah data tersebut menjadi laporan dan peringatan.</p></details>
+        <details><summary>Apakah data perusahaan saya aman?</summary><p>Setiap perusahaan memiliki kantor dan kode akses sendiri. Data satu perusahaan tidak bisa dilihat perusahaan lain.</p></details>
+        <details><summary>Bisakah tugas karyawan diubah?</summary><p>Bisa. Nama, jabatan, dan daftar tugas dapat diubah saat rekrut maupun setelahnya. Karyawan juga bisa diberhentikan kapan saja.</p></details>
+        <details><summary>Bagaimana cara berlangganan?</summary><p>Coba demo gratis terlebih dahulu, lalu hubungi kami untuk memilih paket. Anda akan menerima kode akses kantor dalam hitungan menit.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="final">
+        <h2>Siap punya tim yang tidak pernah lelah?</h2>
+        <p>Coba demo sekarang, rekrut karyawan AI pertama Anda, dan lihat laporannya dalam hitungan menit.</p>
+        <div class="cta">
+          <a class="btn light" href="/kantor?kode=DEMO123">Coba Demo Gratis →</a>
+          <a class="btn ghost-light js-contact" data-plan="" href="#harga">Hubungi Kami</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <span>© <span id="year"></span> Kantor Karyawan AI</span>
+      <span><a href="#cara-kerja">Cara Kerja</a><a href="#harga">Harga</a><a href="/kantor">Masuk</a></span>
+    </div>
+  </footer>
+
+  <script type="module" src="/landing.js"></script>
+</body>
+</html>

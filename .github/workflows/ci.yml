@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Tes (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [18, 20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Cek sintaks
+        run: npm run check
+      - name: Tes otomatis
+        run: npm test
+      - name: Smoke test server
+        env:
+          ADMIN_PASSWORD: ci-only-password
+          PORT: 3000
+        run: |
+          npm start > server.log 2>&1 &
+          for i in $(seq 1 20); do curl -fsS http://127.0.0.1:3000/api/health && break; sleep 0.5; done
+          for p in / /kantor /admin; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "http://127.0.0.1:3000$p")
+            echo "$p -> $code"; test "$code" = 200
+          done
+          curl -fsSI http://127.0.0.1:3000/ | grep -i '^content-security-policy:'
+      - name: Log server (jika gagal)
+        if: failure()
+        run: cat server.log || true

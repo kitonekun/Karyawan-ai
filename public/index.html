@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kantor Karyawan AI</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <section id="login" class="login hidden">
+    <form id="loginForm" class="card login-card">
+      <div class="logo">🏢</div>
+      <h1>Kantor Karyawan AI</h1>
+      <p class="muted">Masukkan kode akses perusahaan Anda untuk masuk ke kantor.</p>
+      <input name="code" placeholder="Kode perusahaan, mis. DEMO123" autocomplete="off" required />
+      <button class="btn primary">Masuk Kantor</button>
+      <p class="error" id="loginError"></p>
+      <p class="muted small"><a href="/">← Beranda</a> · Penyedia layanan? <a href="/admin">Panel admin</a></p>
+    </form>
+  </section>
+
+  <section id="app" class="app hidden">
+    <aside class="sidebar">
+      <div class="brand">🏢 <span id="companyName"></span></div>
+      <nav id="nav">
+        <button data-tab="manager" class="active">🧑‍💼 Kepala Pengelola</button>
+        <button data-tab="office">👥 Kantor <span class="badge" id="empCount"></span></button>
+        <button data-tab="warehouse">📦 Gudang</button>
+        <button data-tab="finance">💰 Keuangan</button>
+        <button data-tab="reports">📋 Laporan <span class="badge warn" id="alertCount"></span></button>
+      </nav>
+      <div class="sidebar-foot">
+        <div class="muted small" id="quota"></div>
+        <div class="muted small" id="aiMode"></div>
+        <button class="btn ghost small" id="logout">Keluar</button>
+      </div>
+    </aside>
+
+    <main>
+      <div id="tab-manager" class="tab">
+        <header><h2>🧑‍💼 <span id="managerTitle"></span> — Kepala Pengelola Karyawan</h2></header>
+        <div class="chat" id="managerChat"></div>
+        <form class="chat-input" id="managerForm">
+          <input name="text" placeholder='Contoh: "3 karyawan untuk stok gudang, laporan keuangan, dan pantau stok menipis"' autocomplete="off" />
+          <button class="btn primary">Kirim</button>
+        </form>
+      </div>
+
+      <div id="tab-office" class="tab hidden">
+        <header>
+          <h2>👥 Kantor</h2>
+          <button class="btn primary" id="runAll">▶ Mulai Hari Kerja (semua karyawan)</button>
+        </header>
+        <div class="grid" id="employees"></div>
+      </div>
+
+      <div id="tab-warehouse" class="tab hidden">
+        <header><h2>📦 Gudang</h2></header>
+        <form class="card form-row" id="itemForm">
+          <input name="name" placeholder="Nama barang" required />
+          <input name="unit" placeholder="Satuan (pcs)" />
+          <input name="qty" type="number" min="0" placeholder="Stok awal" required />
+          <input name="min" type="number" min="0" placeholder="Stok minimum" required />
+          <input name="price" type="number" min="0" placeholder="Harga jual" />
+          <button class="btn primary">+ Tambah Barang</button>
+        </form>
+        <div class="card"><table id="itemsTable"></table></div>
+        <h3>Riwayat Mutasi</h3>
+        <div class="card"><table id="movesTable"></table></div>
+      </div>
+
+      <div id="tab-finance" class="tab hidden">
+        <header><h2>💰 Keuangan</h2></header>
+        <div class="stats" id="financeStats"></div>
+        <form class="card form-row" id="txForm">
+          <select name="type"><option value="income">Pemasukan</option><option value="expense">Pengeluaran</option></select>
+          <input name="amount" type="number" min="1" placeholder="Nominal (Rp)" required />
+          <input name="category" placeholder="Kategori, mis. Gaji" />
+          <input name="note" placeholder="Keterangan" />
+          <button class="btn primary">+ Catat</button>
+        </form>
+        <div class="card"><table id="txTable"></table></div>
+      </div>
+
+      <div id="tab-reports" class="tab hidden">
+        <header><h2>📋 Laporan & Peringatan</h2></header>
+        <h3>🚨 Peringatan Stok Menipis</h3>
+        <div id="alerts"></div>
+        <h3>Laporan Karyawan</h3>
+        <div id="reports"></div>
+      </div>
+    </main>
+  </section>
+
+  <dialog id="empDialog">
+    <div class="dialog-head"><strong id="empDialogTitle"></strong><button class="btn ghost small" id="empDialogClose">✕</button></div>
+    <div class="chat" id="empChat"></div>
+    <form class="chat-input" id="empForm">
+      <input name="text" placeholder="Tanya atau beri perintah, mis. &quot;laporan stok&quot;" autocomplete="off" />
+      <button class="btn primary">Kirim</button>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="/app.js" type="module"></script>
+</body>
+</html>
