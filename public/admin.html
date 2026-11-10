@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Panel Penyedia — Kantor Karyawan AI</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <section id="login" class="login hidden">
+    <form id="loginForm" class="card login-card">
+      <div class="logo">🔐</div>
+      <h1>Panel Penyedia</h1>
+      <p class="muted">Kelola perusahaan yang menyewa karyawan AI.</p>
+      <input name="password" type="password" placeholder="Kata sandi admin" required />
+      <button class="btn primary">Masuk</button>
+      <p class="error" id="loginError"></p>
+    </form>
+  </section>
+
+  <main id="panel" class="hidden" style="max-width:1100px;margin:0 auto">
+    <div class="tab">
+      <header><h2>🔐 Panel Penyedia — Perusahaan Penyewa</h2><a class="btn" href="/kantor">Ke halaman perusahaan</a></header>
+      <form class="card form-row" id="newTenant">
+        <input name="name" placeholder="Nama perusahaan penyewa" required />
+        <input name="maxEmployees" type="number" min="1" max="50" value="5" title="Kuota karyawan AI sesuai paket" />
+        <button class="btn primary">+ Daftarkan Perusahaan</button>
+      </form>
+      <div class="card"><table id="tenants"></table></div>
+      <p class="muted small">Berikan <strong>kode akses</strong> ke perusahaan penyewa. Mereka masuk di halaman <code>/kantor</code> dengan kode tersebut.</p>
+    </div>
+  </main>
+  <div id="toast" class="toast hidden"></div>
+  <script type="module" src="/admin.js"></script>
+</body>
+</html>

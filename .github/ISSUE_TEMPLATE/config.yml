@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Laporkan celah keamanan secara privat
+    url: https://github.com/kitonekun/Karyawan-ai/security/advisories/new
+    about: Jangan laporkan celah keamanan di issue publik.

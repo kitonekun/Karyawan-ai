@@ -1,0 +1,14 @@
+{
+  "name": "kantor-karyawan-ai",
+  "version": "1.0.0",
+  "description": "Kantor karyawan AI yang bisa disewakan ke perusahaan",
+  "license": "UNLICENSED",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test",
+    "check": "for f in src/*.js public/*.js test/*.js; do node --check \"$f\" || exit 1; done"
+  },
+  "engines": { "node": ">=18" }
+}
